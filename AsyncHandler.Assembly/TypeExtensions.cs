@@ -39,29 +39,6 @@ public static class TypeExtensions
         .FirstOrDefault(t => type.GetType().IsAssignableFrom(t));
     }
     /// <summary>
-    /// Searches through the AppDomain for the specified type argument , some smart tricks
-    /// and filters are applied to boost performance.
-    /// this will return the first match among multiple matches found, if any.
-    /// </summary>
-    /// <typeparam name="T">The type to search for a match.</typeparam>
-    /// <returns>A Type if there is a match or null otherwise</returns>
-    public static Type? FindByType(this Type type)
-    {
-        var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                    where assembly.FullName != null &&
-                    !assembly.FullName.StartsWith("Microsoft") &&
-                    !assembly.FullName.StartsWith("System")
-                    select assembly
-                    ).ToList();
-
-        var targetDefinition = type.GetType().Assembly.GetName();
-
-        return asses.Where(x => x.GetReferencedAssemblies()
-        .Any(an => AssemblyName.ReferenceMatchesDefinition(an, targetDefinition)))
-        .SelectMany(a => a.GetTypes())
-        .FirstOrDefault(t => type.GetType().IsAssignableFrom(t));
-    }
-    /// <summary>
     /// Searches through the AppDomain for the type argument that matches the specified
     /// type parameter.
     /// use this when you have multiple matches and use the type arugment for an exact match.

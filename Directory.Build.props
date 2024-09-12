@@ -1,0 +1,28 @@
+<Project>
+
+    <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- <LangVersion>13</LangVersion> -->
+    <!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->
+    <Version>1.0.0</Version>
+    <Authors>asynchandler</Authors>
+    <Company>asynchandler</Company>
+    <PackageTags>Assembly;Type;Reflection;Extensions;AppDomain;EventSourcing</PackageTags>
+    <Description>
+      A library to help simplify type and assembly discovery.
+    </Description>
+    <PackageProjectUrl>https://github.com/asynchandler/AsyncHandler.Assembly</PackageProjectUrl>
+    <PackageIcon>ah_radius.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/asynchandler/AsyncHandler.Assembly</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.assets\ah_radius.png" Pack="true" PackagePath="\"/>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+</Project>
