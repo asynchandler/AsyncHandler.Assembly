@@ -1,7 +1,6 @@
-namespace AsyncHandler.Assembly;
+namespace AsyncHandler.Asse;
 
 using System.Reflection;
-using Assembly = System.Reflection.Assembly;
 public static class TypeExtensions
 {
     
@@ -13,7 +12,7 @@ public static class TypeExtensions
     /// <returns>A Type if one is found or null otherwise</returns>
     public static Type? FindByAsse(this Type type, Assembly assembly)
     {
-        return assembly.GetTypes().Where(x => type.GetType().IsAssignableFrom(x)).FirstOrDefault();
+        return assembly.GetTypes().Where(x => type.IsAssignableFrom(x)).FirstOrDefault();
     }
     
     /// <summary>
@@ -26,17 +25,17 @@ public static class TypeExtensions
     public static Type? FindByCallingAsse(this Type type, Assembly caller)
     {
         var exists = caller.GetTypes()
-        .FirstOrDefault(x => type.GetType().IsAssignableFrom(x));
+        .FirstOrDefault(x => type.IsAssignableFrom(x));
         if(exists != null)
             return exists;
         
         var refs = caller.GetReferencedAssemblies()
-        .Where(r => !r.FullName.StartsWith("Microsoft") && !r.FullName.StartsWith("System"));
+        .Where(r => !TDiscover.ExcludedAssemblies.Any(x => r.FullName.StartsWith(x)));
 
         return refs.Where(x => Assembly.Load(x).GetReferencedAssemblies()
-        .Any(r => AssemblyName.ReferenceMatchesDefinition(r, type.GetType().Assembly.GetName())))
+        .Any(r => AssemblyName.ReferenceMatchesDefinition(r, type.Assembly.GetName())))
         .SelectMany(x => Assembly.Load(x).GetTypes())
-        .FirstOrDefault(t => type.GetType().IsAssignableFrom(t));
+        .FirstOrDefault(t => type.IsAssignableFrom(t));
     }
     /// <summary>
     /// Searches through the AppDomain for the type argument that matches the specified
@@ -50,16 +49,16 @@ public static class TypeExtensions
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                     where assembly.FullName != null &&
-                    !assembly.FullName.StartsWith("Microsoft") &&
-                    !assembly.FullName.StartsWith("System")
+                    !TDiscover.ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                    assembly.ManifestModule.Name != "<In Memory Module>" 
                     select assembly
                     ).ToList();
 
-        var targetDefinition = type.GetType().Assembly.GetName();
+        var targetDefinition = type.Assembly.GetName();
 
         return asses.Where(x => x.GetReferencedAssemblies()
         .Any(an => AssemblyName.ReferenceMatchesDefinition(an, targetDefinition)))
         .SelectMany(a => a.GetTypes())
-        .FirstOrDefault(t => type.GetType().IsAssignableFrom(t) && t.Name == typeName);
+        .FirstOrDefault(t => type.IsAssignableFrom(t) && t.Name == typeName);
     }
 }
