@@ -1,10 +1,9 @@
-﻿namespace AsyncHandler.Assembly;
+﻿namespace AsyncHandler.Asse;
 
 using System.Reflection;
-using Assembly = System.Reflection.Assembly;
 public static class TDiscover
 {
-    
+    public static IEnumerable<string> ExcludedAssemblies => ["Microsoft", "System", "Swashbuckle"];
     /// <summary>
     /// Searches through the provided assembly.
     /// </summary>
@@ -31,7 +30,7 @@ public static class TDiscover
             return type;
         
         var refs = caller.GetReferencedAssemblies()
-        .Where(r => !r.FullName.StartsWith("Microsoft") && !r.FullName.StartsWith("System"));
+        .Where(r => !ExcludedAssemblies.Any(x => r.FullName.StartsWith(x)));
 
         return refs.Where(x => Assembly.Load(x).GetReferencedAssemblies()
         .Any(r => AssemblyName.ReferenceMatchesDefinition(r, typeof(T).Assembly.GetName())))
@@ -49,8 +48,8 @@ public static class TDiscover
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                     where assembly.FullName != null &&
-                    !assembly.FullName.StartsWith("Microsoft") &&
-                    !assembly.FullName.StartsWith("System")
+                    !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                    assembly.ManifestModule.Name != "<In Memory Module>" 
                     select assembly
                     ).ToList();
 
@@ -73,8 +72,8 @@ public static class TDiscover
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                     where assembly.FullName != null &&
-                    !assembly.FullName.StartsWith("Microsoft") &&
-                    !assembly.FullName.StartsWith("System")
+                    !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                    assembly.ManifestModule.Name != "<In Memory Module>" 
                     select assembly
                     ).ToList();
 
@@ -96,8 +95,8 @@ public static class TDiscover
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                     where assembly.FullName != null &&
-                    !assembly.FullName.StartsWith("Microsoft") &&
-                    !assembly.FullName.StartsWith("System")
+                    !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                    assembly.ManifestModule.Name != "<In Memory Module>" 
                     select assembly
                     ).ToList();
 

@@ -7,9 +7,6 @@
 [![Nuget](https://badgen.net/nuget/dt/asynchandler.Assembly)](https://www.nuget.org/packages/AsyncHandler.Assembly)
 [![Github follow](https://img.shields.io/badge/give_us_a-⭐-yellow?logo=github)](https://github.com/asynchandler/AsyncHandler.Assembly)
 
-<div align="left">
-    <img src=".assets/github.png" width="80" height="80" style="float:left;" alt="asynchandler">
-</div>
 
 ### Overview
 `AsyncHandler.Assembly` helps simplifying type discovery overhead when searching through .Net assemblies with a bunch of helpful methods to speed up your development.
@@ -70,7 +67,7 @@ TDiscover.FindByTypeName("OrderPlaced");
 ```
 
 ### Give us a ⭐
-If you are an assembly and typing guru, give [AsyncHandler.Assembly](https://github.com/asynchandler/AsyncHandler.Assembly) a star. :purple_heart:
+If you are an event sourcer and love OSS, give [AsyncHandler.Assembly](https://github.com/asynchandler/AsyncHandler.Assembly) a star. :purple_heart:
 
 ### License
 
