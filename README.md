@@ -1,5 +1,5 @@
 # AsyncHandler.Assembly
-### .Net type discovery and assembly scanning made simplified.
+### A .Net library that helps making type discovery faster and simplified. 
 
 [![Github follow](https://img.shields.io/badge/follow-asynchandler-bf9136?logo=github)](https://github.com/asynchandler)
 [![Github follow](https://img.shields.io/badge/follow-eventsourcer-bf9136?logo=github)](https://github.com/eventsourcer)
@@ -12,7 +12,7 @@
 </div>
 
 ### Overview
-`AsyncHandler.Assembly` helps simplifying type discovery overhead when searching through .Net assemblies with a bunch of helpful methods to speed up your development.
+`AsyncHandler.Assembly` simplifies type discovery overhead when searching through .Net assemblies with a bunch of helpful methods to speed up your development.
 
 ### Prerequisities
 [![My Skills](https://skillicons.dev/icons?i=dotnet)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)

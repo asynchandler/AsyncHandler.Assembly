@@ -1,8 +1,14 @@
 ﻿namespace AsyncHandler.Asse;
 
 using System.Reflection;
+/// <summary>
+/// Helper methods to find your type
+/// </summary>
 public static class TDiscover
 {
+    /// <summary>
+    /// Exclude assemblies to enhance performance
+    /// </summary>
     public static IEnumerable<string> ExcludedAssemblies => ["Microsoft", "System", "Swashbuckle"];
     /// <summary>
     /// Searches through the provided assembly.

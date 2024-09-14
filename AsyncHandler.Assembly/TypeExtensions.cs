@@ -1,6 +1,9 @@
 namespace AsyncHandler.Asse;
 
 using System.Reflection;
+/// <summary>
+/// Helper methods to find your type
+/// </summary>
 public static class TypeExtensions
 {
     
@@ -8,7 +11,7 @@ public static class TypeExtensions
     /// Searches through the provided assembly.
     /// </summary>
     /// <param name="assembly">The assembly to search through.</param>
-    /// <typeparam name="T">The type to search for.</typeparam>
+    /// <param name="type">The type to search for.</param>
     /// <returns>A Type if one is found or null otherwise</returns>
     public static Type? FindByAsse(this Type type, Assembly assembly)
     {
@@ -20,7 +23,7 @@ public static class TypeExtensions
     /// caller results in significant performance gains compared to AppDomain.
     /// </summary>
     /// <param name="caller">Calling assembly i.e. Assembly.GetCallingAssembly().</param>
-    /// <typeparam name="T">The type to search for a match.</typeparam>
+    /// <param name="type">The type to search for.</param>
     /// <returns>A Type if one is found or null otherwise</returns>
     public static Type? FindByCallingAsse(this Type type, Assembly caller)
     {
@@ -42,8 +45,8 @@ public static class TypeExtensions
     /// type parameter.
     /// use this when you have multiple matches and use the type arugment for an exact match.
     /// </summary>
+    /// <param name="type">The type argument to search for.</param>
     /// <param name="typeName">The type argument to search for.</param>
-    /// <typeparam name="T">The type parameter to search for a match.</typeparam>
     /// <returns>A Type if there is a match or null otherwise</returns>
     public static Type? FindByTypeName(this Type type, string typeName)
     {
