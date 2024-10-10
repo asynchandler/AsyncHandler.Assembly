@@ -7,7 +7,7 @@
 [![Github follow](https://img.shields.io/badge/give_us_a-⭐-yellow?logo=github)](https://github.com/eventstorage/tdiscover)
 
 <div align="left">
-    <img src=".assets/github.PNG" width="80" height="80" style="float:left;" alt="asynchandler">
+    <img src=".assets/github.png" width="80" height="80" style="float:left;" alt="asynchandler">
 </div>
 
 ### Overview
