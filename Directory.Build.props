@@ -4,23 +4,21 @@
     <TargetFramework>net8.0</TargetFramework>
     <!-- <LangVersion>13</LangVersion> -->
     <!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->
-    <Version>1.1.0</Version>
-    <Authors>asynchandler</Authors>
-    <Company>asynchandler</Company>
+    <Version>0.0.0-alpha</Version>
+    <Authors>eventstorage</Authors>
+    <Company>eventstorage</Company>
     <PackageTags>Assembly;Type;Reflection;Extensions;AppDomain;EventSourcing</PackageTags>
     <Description>
-      A library to help simplify type and assembly discovery.
+      .Net type discovery and assembly scanning made simplified.
     </Description>
-    <PackageProjectUrl>https://github.com/asynchandler/AsyncHandler.Assembly</PackageProjectUrl>
-    <PackageIcon>ah_radius.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/eventstorage/tdiscover</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/asynchandler/AsyncHandler.Assembly</RepositoryUrl>
+    <RepositoryUrl>https://github.com/eventstorage/tdiscover.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\.assets\ah_radius.png" Pack="true" PackagePath="\"/>
     <None Include="README.md" Pack="true" PackagePath="\"/>
     <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
   </ItemGroup>
