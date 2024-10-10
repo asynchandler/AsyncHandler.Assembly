@@ -1,12 +1,13 @@
-namespace AsyncHandler.Asse;
+namespace TDiscover;
 
 using System.Reflection;
+
 /// <summary>
 /// Helper methods to find your type
 /// </summary>
 public static class TypeExtensions
 {
-    
+
     /// <summary>
     /// Searches through the provided assembly.
     /// </summary>
@@ -17,7 +18,7 @@ public static class TypeExtensions
     {
         return assembly.GetTypes().Where(x => type.IsAssignableFrom(x)).FirstOrDefault();
     }
-    
+
     /// <summary>
     /// Searches through the provided calling assembly, this reverse search starting from
     /// caller results in significant performance gains compared to AppDomain.
@@ -29,11 +30,11 @@ public static class TypeExtensions
     {
         var exists = caller.GetTypes()
         .FirstOrDefault(x => type.IsAssignableFrom(x));
-        if(exists != null)
+        if (exists != null)
             return exists;
-        
+
         var refs = caller.GetReferencedAssemblies()
-        .Where(r => !TDiscover.ExcludedAssemblies.Any(x => r.FullName.StartsWith(x)));
+        .Where(r => !Td.ExcludedAssemblies.Any(x => r.FullName.StartsWith(x)));
 
         return refs.Where(x => Assembly.Load(x).GetReferencedAssemblies()
         .Any(r => AssemblyName.ReferenceMatchesDefinition(r, type.Assembly.GetName())))
@@ -51,10 +52,10 @@ public static class TypeExtensions
     public static Type? FindByTypeName(this Type type, string typeName)
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                    where assembly.FullName != null &&
-                    !TDiscover.ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
-                    assembly.ManifestModule.Name != "<In Memory Module>" 
-                    select assembly
+                     where assembly.FullName != null &&
+                     !Td.ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                     assembly.ManifestModule.Name != "<In Memory Module>"
+                     select assembly
                     ).ToList();
 
         var targetDefinition = type.Assembly.GetName();

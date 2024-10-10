@@ -1,10 +1,10 @@
-﻿namespace AsyncHandler.Asse;
+﻿namespace TDiscover;
 
 using System.Reflection;
 /// <summary>
 /// Helper methods to find your type
 /// </summary>
-public static class TDiscover
+public static class Td
 {
     /// <summary>
     /// Exclude assemblies to enhance performance
@@ -20,7 +20,7 @@ public static class TDiscover
     {
         return assembly.GetTypes().Where(x => typeof(T).IsAssignableFrom(x)).FirstOrDefault();
     }
-    
+
     /// <summary>
     /// Searches through the provided calling assembly, this reverse search starting from
     /// caller results in significant performance gains compared to AppDomain.
@@ -32,9 +32,9 @@ public static class TDiscover
     {
         var type = caller.GetTypes()
         .FirstOrDefault(x => typeof(T).IsAssignableFrom(x));
-        if(type != null)
+        if (type != null)
             return type;
-        
+
         var refs = caller.GetReferencedAssemblies()
         .Where(r => !ExcludedAssemblies.Any(x => r.FullName.StartsWith(x)));
 
@@ -53,10 +53,10 @@ public static class TDiscover
     public static Type? FindByType<T>()
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                    where assembly.FullName != null &&
-                    !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
-                    assembly.ManifestModule.Name != "<In Memory Module>" 
-                    select assembly
+                     where assembly.FullName != null &&
+                     !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                     assembly.ManifestModule.Name != "<In Memory Module>"
+                     select assembly
                     ).ToList();
 
         var targetDefinition = typeof(T).Assembly.GetName();
@@ -77,10 +77,10 @@ public static class TDiscover
     public static Type? FindByTypeName<T>(string typeName)
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                    where assembly.FullName != null &&
-                    !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
-                    assembly.ManifestModule.Name != "<In Memory Module>" 
-                    select assembly
+                     where assembly.FullName != null &&
+                     !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                     assembly.ManifestModule.Name != "<In Memory Module>"
+                     select assembly
                     ).ToList();
 
         var targetDefinition = typeof(T).Assembly.GetName();
@@ -90,7 +90,7 @@ public static class TDiscover
         .SelectMany(a => a.GetTypes())
         .FirstOrDefault(t => typeof(T).IsAssignableFrom(t) && t.Name == typeName);
     }
-    
+
     /// <summary>
     /// Searches through the AppDomain for the type argument specified.
     /// use this when you want you search for a type name.
@@ -100,10 +100,10 @@ public static class TDiscover
     public static Type? FindByTypeName(string typeName)
     {
         var asses = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                    where assembly.FullName != null &&
-                    !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
-                    assembly.ManifestModule.Name != "<In Memory Module>" 
-                    select assembly
+                     where assembly.FullName != null &&
+                     !ExcludedAssemblies.Any(x => assembly.FullName.StartsWith(x)) &&
+                     assembly.ManifestModule.Name != "<In Memory Module>"
+                     select assembly
                     ).ToList();
 
         return asses.SelectMany(a => a.GetTypes())
